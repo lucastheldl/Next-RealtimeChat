@@ -2,7 +2,10 @@
 import {
   FormContainer,
   FormWrapper,
+  RegisterBtn,
   RegisterForm,
+  RegisterInput,
+  SignInContainer,
 } from "@/styles/pages/register";
 import { signUp } from "../../../firebase/auth/signUp";
 import z from "zod";
@@ -40,30 +43,38 @@ export default function Register() {
     reset();
   }
   return (
-    <FormContainer>
-      <FormWrapper>
+    <FormWrapper>
+      <FormContainer>
+        <SignInContainer>
+          <h2>Bem vindo de volta!</h2>
+          <p>
+            Para se manter conectado com a gente, fassa login com seu email e
+            senha
+          </p>
+        </SignInContainer>
         <RegisterForm onSubmit={handleSubmit(handleRegister)}>
-          <input
+          <h2>Crie sua conta</h2>
+          <RegisterInput
             type="text"
             placeholder="Crie um nome de usuario"
             required
             {...register("username")}
           />
-          <input
+          <RegisterInput
             type="email"
             placeholder="Digite seu email"
             required
             {...register("email")}
           />
-          <input
+          <RegisterInput
             type="password"
             placeholder="Crie uma senha"
             required
             {...register("password")}
           />
-          <button type="submit">Cadastrar</button>
+          <RegisterBtn type="submit">Cadastrar</RegisterBtn>
         </RegisterForm>
-      </FormWrapper>
-    </FormContainer>
+      </FormContainer>
+    </FormWrapper>
   );
 }
