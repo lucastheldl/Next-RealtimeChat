@@ -1,9 +1,9 @@
 import { styled } from "..";
 
-export const FormWrapper = styled("div", {
-  // background-color: ${(props) => props.theme["gray-300"]},
-  height: "600px",
-  maxWidth: `1120px`,
+export const FormWrapper = styled("main", {
+  height: "calc(100vh - 10rem)",
+  maxWidth: `60rem`,
+
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -14,7 +14,6 @@ export const FormWrapper = styled("div", {
   background: "$white",
 });
 export const FormContainer = styled("div", {
-  // background-color: ${(props) => props.theme["gray-300"]},
   display: "flex",
   gap: "1rem",
 
@@ -45,6 +44,8 @@ export const RegisterForm = styled("form", {
 
   h2: {
     color: "$green300",
+    fontSize: "3rem",
+    marginBottom: "2rem",
   },
 });
 export const RegisterInput = styled("input", {
@@ -64,7 +65,9 @@ export const RegisterBtn = styled("button", {
 
   color: "white",
   fontWeight: "bold",
+  fontSize: "1rem",
 
   borderRadius: "2rem",
   padding: "1rem",
+  marginTop: "2rem",
 });
