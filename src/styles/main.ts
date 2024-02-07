@@ -14,7 +14,11 @@ export const ContactsContainer = styled("section", {
 });
 
 export const ChatContainer = styled("section", {
-  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
   flex: 1,
-  backgroundColor: "white",
+
+  height: "100vh",
+  backgroundColor: "$gray100",
 });

@@ -12,14 +12,21 @@ export const Wrapper = styled("button", {
   padding: "1rem",
 
   border: "none",
-  borderBottom: "1px solid $gray100",
+  borderLeft: "5px solid transparent",
 
   background: "none",
 
   img: {
     borderRadius: "50%",
   },
+
+  h3: {
+    color: "$white",
+  },
+
   "&:hover": {
     cursor: "pointer",
+    borderLeft: "5px solid $gray100",
+    background: "linear-gradient(45deg, transparent, $green500)",
   },
 });
