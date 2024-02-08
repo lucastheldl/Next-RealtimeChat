@@ -2,7 +2,7 @@
 import {
   FormContainer,
   FormWrapper,
-  RegisterBtn,
+  Btn,
   RegisterForm,
   RegisterInput,
   SignInContainer,
@@ -48,9 +48,12 @@ export default function Register() {
         <SignInContainer>
           <h2>Bem vindo de volta!</h2>
           <p>
-            Para se manter conectado com a gente, fassa login com seu email e
+            Para se manter conectado com a gente, faça login com seu email e
             senha
           </p>
+          <Btn type="submit" border={"whiteBorder"}>
+            Login
+          </Btn>
         </SignInContainer>
         <RegisterForm onSubmit={handleSubmit(handleRegister)}>
           <h2>Crie sua conta</h2>
@@ -72,7 +75,7 @@ export default function Register() {
             required
             {...register("password")}
           />
-          <RegisterBtn type="submit">Cadastrar</RegisterBtn>
+          <Btn type="submit">Cadastrar</Btn>
         </RegisterForm>
       </FormContainer>
     </FormWrapper>

@@ -4,6 +4,10 @@ export const globalStyles = globalCss({
   "*": {
     padding: 0,
     margin: 0,
+    ":focus": {
+      outline: 0,
+      boxShadow: "0 0 0 2px $green500",
+    },
   },
 
   body: {

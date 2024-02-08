@@ -10,7 +10,7 @@ export const ContactsContainer = styled("section", {
 
   height: "100vh",
   flex: 0.3,
-  backgroundColor: "$green300",
+  background: "linear-gradient(to top,$green500 0%, $green300 100%)",
 });
 
 export const ChatContainer = styled("section", {

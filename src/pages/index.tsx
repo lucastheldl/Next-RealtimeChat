@@ -5,6 +5,7 @@ import { ChatContainer, ContactsContainer, Wrapper } from "@/styles/main";
 import { ContactItem } from "@/components/contactItem";
 import { MesageInput } from "@/components/messageInput";
 import { ChatHeader } from "@/components/chatHeader";
+import { SearchContactInput } from "@/components/searchContactInput";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>RealtimeChat</title>
+        <title>Realtime Chat</title>
         <meta
           name="description"
           content="A real time chat app to connect with your friends"
@@ -22,6 +23,7 @@ export default function Home() {
       </Head>
       <Wrapper className={` ${inter.className}`}>
         <ContactsContainer>
+          <SearchContactInput />
           <ContactItem />
           <ContactItem />
           <ContactItem />

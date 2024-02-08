@@ -30,6 +30,17 @@ export const SignInContainer = styled("div", {
 
   backgroundColor: `$green300`,
   padding: "1rem",
+
+  h2: {
+    color: "white",
+    fontSize: "2rem",
+    marginBottom: "2rem",
+  },
+  p: {
+    textAlign: "center",
+    color: "white",
+    padding: "0.5rem",
+  },
 });
 
 export const RegisterForm = styled("form", {
@@ -56,7 +67,7 @@ export const RegisterInput = styled("input", {
   maxWidth: "400px",
   width: "100%",
 });
-export const RegisterBtn = styled("button", {
+export const Btn = styled("button", {
   maxWidth: "200px",
   width: "100%",
 
@@ -70,4 +81,19 @@ export const RegisterBtn = styled("button", {
   borderRadius: "2rem",
   padding: "1rem",
   marginTop: "2rem",
+
+  "&:hover": {
+    cursor: "pointer",
+    backgroundColor: "$green500",
+  },
+  variants: {
+    border: {
+      noborder: {
+        border: "1px solid transparent",
+      },
+      whiteBorder: {
+        border: "1px solid white",
+      },
+    },
+  },
 });

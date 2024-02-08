@@ -12,10 +12,6 @@ export const Input = styled("input", {
   border: "none",
 
   backgroundColor: "white",
-
-  "&:hover": {
-    cursor: "pointer",
-  },
 });
 export const SendBtn = styled("button", {
   padding: "1rem",
