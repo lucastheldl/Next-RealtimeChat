@@ -12,10 +12,24 @@ import { MesageInput } from "@/components/messageInput";
 import { ChatHeader } from "@/components/chatHeader";
 import { SearchContactInput } from "@/components/searchContactInput";
 import { Message } from "@/components/message";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
+interface Message {
+  text: string;
+}
+
 export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  function sendMessage(message: string) {
+    let newMessage = {
+      text: message,
+    };
+    setMessages((prevState) => [...prevState, newMessage]);
+  }
+
   return (
     <>
       <Head>
@@ -37,7 +51,14 @@ export default function Home() {
         <ChatContainer>
           <ChatHeader />
           <ChatArea>
-            <Message type="sended" messageText={"Texto"} />
+            {messages &&
+              messages.map((message, i) => {
+                return (
+                  <Message key={i} type={"sended"} messageText={message.text} />
+                );
+              })}
+
+            {/* <Message type="sended" messageText={"Texto"} />
             <Message
               type="received"
               messageText={"Um testo de test para testar a menssagen"}
@@ -48,9 +69,9 @@ export default function Home() {
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
               }
             />
-            <Message type="sended" messageText={"Eu sei"} />
+            <Message type="sended" messageText={"Eu sei"} /> */}
           </ChatArea>
-          <MesageInput />
+          <MesageInput sendMessage={sendMessage} />
         </ChatContainer>
       </Wrapper>
     </>

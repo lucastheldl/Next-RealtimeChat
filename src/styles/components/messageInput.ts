@@ -1,6 +1,6 @@
 import { styled } from "..";
 
-export const MessageContainer = styled("div", {
+export const MessageContainer = styled("form", {
   display: "flex",
   width: "100%",
 });
