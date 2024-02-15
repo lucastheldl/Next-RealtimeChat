@@ -1,11 +1,17 @@
 import Head from "next/head";
 
 import { Inter } from "next/font/google";
-import { ChatContainer, ContactsContainer, Wrapper } from "@/styles/main";
+import {
+  ChatArea,
+  ChatContainer,
+  ContactsContainer,
+  Wrapper,
+} from "@/styles/main";
 import { ContactItem } from "@/components/contactItem";
 import { MesageInput } from "@/components/messageInput";
 import { ChatHeader } from "@/components/chatHeader";
 import { SearchContactInput } from "@/components/searchContactInput";
+import { Message } from "@/components/message";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +36,20 @@ export default function Home() {
         </ContactsContainer>
         <ChatContainer>
           <ChatHeader />
+          <ChatArea>
+            <Message type="sended" messageText={"Texto"} />
+            <Message
+              type="received"
+              messageText={"Um testo de test para testar a menssagen"}
+            />
+            <Message
+              type="received"
+              messageText={
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            />
+            <Message type="sended" messageText={"Eu sei"} />
+          </ChatArea>
           <MesageInput />
         </ChatContainer>
       </Wrapper>

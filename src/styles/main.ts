@@ -22,3 +22,11 @@ export const ChatContainer = styled("section", {
   height: "100vh",
   backgroundColor: "$gray100",
 });
+
+export const ChatArea = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+
+  padding: "0 1rem",
+});

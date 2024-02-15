@@ -19,9 +19,14 @@ export const SendBtn = styled("button", {
   border: "none",
 
   backgroundColor: "$green300",
+  color: "white",
 
   "&:hover": {
     cursor: "pointer",
     backgroundColor: "$green500",
+  },
+
+  "& svg": {
+    margin: "auto",
   },
 });
