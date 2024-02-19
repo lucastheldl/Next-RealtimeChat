@@ -1,9 +1,13 @@
 import { Wrapper } from "@/styles/components/contactItem";
 import Image from "next/image";
 
-export function ContactItem() {
+interface ContactItemProps {
+  handleSelectContact: (id: string) => void;
+}
+
+export function ContactItem({ handleSelectContact }: ContactItemProps) {
   return (
-    <Wrapper>
+    <Wrapper onClick={() => handleSelectContact("id test")}>
       <Image
         src="https://placehold.co/600x400"
         height={30}

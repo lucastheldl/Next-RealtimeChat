@@ -26,7 +26,11 @@ export const ChatContainer = styled("section", {
 export const ChatArea = styled("div", {
   display: "flex",
   flexDirection: "column",
+  flex: 1,
   gap: "0.5rem",
 
-  padding: "0 1rem",
+  overflow: "auto",
+  overflowY: "auto",
+
+  padding: "0 1rem 1rem 0",
 });

@@ -6,13 +6,13 @@ import {
   ChatContainer,
   ContactsContainer,
   Wrapper,
-} from "@/styles/main";
+} from "@/styles/home";
 import { ContactItem } from "@/components/contactItem";
 import { MesageInput } from "@/components/messageInput";
 import { ChatHeader } from "@/components/chatHeader";
 import { SearchContactInput } from "@/components/searchContactInput";
 import { Message } from "@/components/message";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +22,7 @@ interface Message {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [selectedChat, setSelectedChat] = useState("");
 
   function sendMessage(message: string) {
     let newMessage = {
@@ -29,6 +30,16 @@ export default function Home() {
     };
     setMessages((prevState) => [...prevState, newMessage]);
   }
+
+  function handleSelectContact(id: string) {
+    setSelectedChat(id);
+  }
+
+  function handleSearchContact(name: string) {}
+
+  useEffect(() => {
+    setMessages([]);
+  }, [selectedChat]);
 
   return (
     <>
@@ -44,9 +55,9 @@ export default function Home() {
       <Wrapper className={` ${inter.className}`}>
         <ContactsContainer>
           <SearchContactInput />
-          <ContactItem />
-          <ContactItem />
-          <ContactItem />
+          <ContactItem handleSelectContact={handleSelectContact} />
+          <ContactItem handleSelectContact={handleSelectContact} />
+          <ContactItem handleSelectContact={handleSelectContact} />
         </ContactsContainer>
         <ChatContainer>
           <ChatHeader />
