@@ -11,6 +11,7 @@ import { signUp } from "../../../firebase/auth/signUp";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 const RegisterSchema = z.object({
   username: z.string(),
@@ -42,6 +43,7 @@ export default function Register() {
     console.log(result);
     reset();
   }
+
   return (
     <FormWrapper>
       <FormContainer>
@@ -51,9 +53,7 @@ export default function Register() {
             Para se manter conectado com a gente, faça login com seu email e
             senha
           </p>
-          <Btn type="submit" border={"whiteBorder"}>
-            Login
-          </Btn>
+          <Link href={"/auth/login"}>Login</Link>
         </SignInContainer>
         <RegisterForm onSubmit={handleSubmit(handleRegister)}>
           <h2>Crie sua conta</h2>

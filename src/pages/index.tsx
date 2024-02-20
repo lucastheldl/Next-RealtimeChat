@@ -13,6 +13,7 @@ import { ChatHeader } from "@/components/chatHeader";
 import { SearchContactInput } from "@/components/searchContactInput";
 import { Message } from "@/components/message";
 import { useEffect, useState } from "react";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,24 +53,29 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Wrapper className={` ${inter.className}`}>
-        <ContactsContainer>
-          <SearchContactInput />
-          <ContactItem handleSelectContact={handleSelectContact} />
-          <ContactItem handleSelectContact={handleSelectContact} />
-          <ContactItem handleSelectContact={handleSelectContact} />
-        </ContactsContainer>
-        <ChatContainer>
-          <ChatHeader />
-          <ChatArea>
-            {messages &&
-              messages.map((message, i) => {
-                return (
-                  <Message key={i} type={"sended"} messageText={message.text} />
-                );
-              })}
+      <AuthContextProvider>
+        <Wrapper className={` ${inter.className}`}>
+          <ContactsContainer>
+            <SearchContactInput />
+            <ContactItem handleSelectContact={handleSelectContact} />
+            <ContactItem handleSelectContact={handleSelectContact} />
+            <ContactItem handleSelectContact={handleSelectContact} />
+          </ContactsContainer>
+          <ChatContainer>
+            <ChatHeader />
+            <ChatArea>
+              {messages &&
+                messages.map((message, i) => {
+                  return (
+                    <Message
+                      key={i}
+                      type={"sended"}
+                      messageText={message.text}
+                    />
+                  );
+                })}
 
-            {/* <Message type="sended" messageText={"Texto"} />
+              {/* <Message type="sended" messageText={"Texto"} />
             <Message
               type="received"
               messageText={"Um testo de test para testar a menssagen"}
@@ -81,10 +87,11 @@ export default function Home() {
               }
             />
             <Message type="sended" messageText={"Eu sei"} /> */}
-          </ChatArea>
-          <MesageInput sendMessage={sendMessage} />
-        </ChatContainer>
-      </Wrapper>
+            </ChatArea>
+            <MesageInput sendMessage={sendMessage} />
+          </ChatContainer>
+        </Wrapper>
+      </AuthContextProvider>
     </>
   );
 }

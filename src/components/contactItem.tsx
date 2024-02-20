@@ -7,7 +7,7 @@ interface ContactItemProps {
 
 export function ContactItem({ handleSelectContact }: ContactItemProps) {
   return (
-    <Wrapper onClick={() => handleSelectContact("id test")}>
+    <Wrapper onClick={() => handleSelectContact(String(Math.random()))}>
       <Image
         src="https://placehold.co/600x400"
         height={30}

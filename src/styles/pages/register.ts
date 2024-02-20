@@ -2,6 +2,7 @@ import { styled } from "..";
 
 export const FormWrapper = styled("main", {
   height: "calc(100vh - 10rem)",
+  minHeight: "30rem",
   maxWidth: `60rem`,
 
   display: "flex",
