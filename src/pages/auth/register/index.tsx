@@ -12,6 +12,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
 
 const RegisterSchema = z.object({
   username: z.string(),
@@ -22,6 +23,8 @@ const RegisterSchema = z.object({
 type RegisterInput = z.infer<typeof RegisterSchema>;
 
 export default function Register() {
+  const router = useRouter();
+
   const {
     control,
     register,
@@ -42,6 +45,7 @@ export default function Register() {
     // else successful
     console.log(result);
     reset();
+    router.push("/");
   }
 
   return (

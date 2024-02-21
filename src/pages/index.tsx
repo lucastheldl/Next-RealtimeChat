@@ -12,24 +12,42 @@ import { MesageInput } from "@/components/messageInput";
 import { ChatHeader } from "@/components/chatHeader";
 import { SearchContactInput } from "@/components/searchContactInput";
 import { Message } from "@/components/message";
-import { useEffect, useState } from "react";
-import { AuthContextProvider } from "@/context/AuthContext";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { db } from "@/firebase/config";
+import { doc, getDoc, updateDoc, arrayUnion, setDoc } from "firebase/firestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
-interface Message {
-  text: string;
-}
-
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<string[]>([]);
   const [selectedChat, setSelectedChat] = useState("");
 
-  function sendMessage(message: string) {
-    let newMessage = {
-      text: message,
-    };
-    setMessages((prevState) => [...prevState, newMessage]);
+  const { user } = useContext(AuthContext);
+
+  async function sendMessage(message: string) {
+    if (!user) {
+      return;
+    }
+    const userDocRef = doc(db, "users", user!.uid);
+
+    const userDocSnapshot = await getDoc(userDocRef);
+
+    if (userDocSnapshot.exists()) {
+      await updateDoc(userDocRef, {
+        priscila: {
+          messages: arrayUnion(...messages, message),
+        },
+      });
+    } else {
+      await setDoc(userDocRef, {
+        priscila: {
+          messages: [message],
+        },
+      });
+    }
+
+    setMessages((prevState) => [...prevState, message]);
   }
 
   function handleSelectContact(id: string) {
@@ -53,29 +71,25 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AuthContextProvider>
-        <Wrapper className={` ${inter.className}`}>
-          <ContactsContainer>
-            <SearchContactInput />
-            <ContactItem handleSelectContact={handleSelectContact} />
-            <ContactItem handleSelectContact={handleSelectContact} />
-            <ContactItem handleSelectContact={handleSelectContact} />
-          </ContactsContainer>
-          <ChatContainer>
-            <ChatHeader />
-            <ChatArea>
-              {messages &&
-                messages.map((message, i) => {
-                  return (
-                    <Message
-                      key={i}
-                      type={"sended"}
-                      messageText={message.text}
-                    />
-                  );
-                })}
 
-              {/* <Message type="sended" messageText={"Texto"} />
+      <Wrapper className={` ${inter.className}`}>
+        <ContactsContainer>
+          <SearchContactInput />
+          <ContactItem handleSelectContact={handleSelectContact} />
+          <ContactItem handleSelectContact={handleSelectContact} />
+          <ContactItem handleSelectContact={handleSelectContact} />
+        </ContactsContainer>
+        <ChatContainer>
+          <ChatHeader />
+          <ChatArea>
+            {messages &&
+              messages.map((message, i) => {
+                return (
+                  <Message key={i} type={"sended"} messageText={message} />
+                );
+              })}
+
+            {/* <Message type="sended" messageText={"Texto"} />
             <Message
               type="received"
               messageText={"Um testo de test para testar a menssagen"}
@@ -87,11 +101,10 @@ export default function Home() {
               }
             />
             <Message type="sended" messageText={"Eu sei"} /> */}
-            </ChatArea>
-            <MesageInput sendMessage={sendMessage} />
-          </ChatContainer>
-        </Wrapper>
-      </AuthContextProvider>
+          </ChatArea>
+          <MesageInput sendMessage={sendMessage} />
+        </ChatContainer>
+      </Wrapper>
     </>
   );
 }
