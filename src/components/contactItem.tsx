@@ -1,9 +1,14 @@
 import { Wrapper } from "@/styles/components/contactItem";
 import Image from "next/image";
 
+interface Chat {
+  id: string;
+  messages: string[];
+}
+
 interface ContactItemProps {
-  chat: { id: string; messages: string[] };
-  handleSelectContact: (chat: { id: string; messages: string[] }) => void;
+  chat: Chat;
+  handleSelectContact: (chat: Chat) => void;
 }
 
 export function ContactItem({ chat, handleSelectContact }: ContactItemProps) {

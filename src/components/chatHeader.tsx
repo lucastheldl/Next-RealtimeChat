@@ -1,7 +1,10 @@
 import { Header } from "@/styles/components/chatHeader";
-
+interface Chat {
+  id: string;
+  messages: string[];
+}
 interface ChatHeaderProps {
-  chat: { id: string; messages: string[] } | null;
+  chat: Chat | null;
 }
 export function ChatHeader({ chat }: ChatHeaderProps) {
   return (
