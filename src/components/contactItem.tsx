@@ -3,12 +3,12 @@ import Image from "next/image";
 
 interface ContactItemProps {
   chat: { id: string; messages: string[] };
-  handleSelectContact: (id: string) => void;
+  handleSelectContact: (chat: { id: string; messages: string[] }) => void;
 }
 
 export function ContactItem({ chat, handleSelectContact }: ContactItemProps) {
   return (
-    <Wrapper onClick={() => handleSelectContact(String(Math.random()))}>
+    <Wrapper onClick={() => handleSelectContact(chat)}>
       <Image
         src="https://placehold.co/600x400"
         height={30}

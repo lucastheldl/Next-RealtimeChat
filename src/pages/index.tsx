@@ -37,12 +37,12 @@ interface Chat {
 export default function Home() {
   const [chats, setChats] = useState<Chat[]>([]);
   const [messages, setMessages] = useState<string[]>([]);
-  const [selectedChat, setSelectedChat] = useState("");
+  const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
 
   const { user } = useContext(AuthContext);
 
   async function sendMessage(message: string) {
-    if (!user) {
+    if (!user || !selectedChat) {
       return;
     }
     const userDocRef = doc(db, "users", user!.uid);
@@ -52,7 +52,7 @@ export default function Home() {
     if (userDocSnapshot.exists()) {
       // Document exists, update the chat
       const chatsCollectionRef = collection(db, `users/${user!.uid}/chats`);
-      const ChatDocRef = doc(chatsCollectionRef, "Rob");
+      const ChatDocRef = doc(chatsCollectionRef, selectedChat.id);
 
       await setDoc(
         ChatDocRef,
@@ -64,7 +64,7 @@ export default function Home() {
     } else {
       // Document does not exist, create a new chat
       const chatsCollectionRef = collection(db, `users/${user!.uid}/chats`);
-      const ChatDocRef = doc(chatsCollectionRef, "Rob");
+      const ChatDocRef = doc(chatsCollectionRef, selectedChat.id);
 
       await setDoc(ChatDocRef, {
         messages: [message],
@@ -74,8 +74,9 @@ export default function Home() {
     setMessages((prevState) => [...prevState, message]);
   }
 
-  function handleSelectContact(id: string) {
-    setSelectedChat(id);
+  function handleSelectContact(chat: Chat) {
+    setSelectedChat(chat);
+    setMessages(chat.messages);
   }
 
   function handleSearchContact(name: string) {}
