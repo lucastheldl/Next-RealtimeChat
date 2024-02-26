@@ -1,9 +1,12 @@
 import { Header } from "@/styles/components/chatHeader";
 
-export function ChatHeader() {
+interface ChatHeaderProps {
+  chat?: { id: string; messages: string[] };
+}
+export function ChatHeader({ chat }: ChatHeaderProps) {
   return (
     <Header>
-      <h2>Lucas Emanoel</h2>
+      <h2>{chat ? chat.id : <p>Realtime chat</p>}</h2>
     </Header>
   );
 }

@@ -131,14 +131,18 @@ export default function Home() {
           })}
         </ContactsContainer>
         <ChatContainer>
-          <ChatHeader />
+          <ChatHeader chat={selectedChat} />
           <ChatArea>
-            {messages &&
+            {selectedChat ? (
+              messages &&
               messages.map((message, i) => {
                 return (
                   <Message key={i} type={"sended"} messageText={message} />
                 );
-              })}
+              })
+            ) : (
+              <p>Selecione um chat para conversar...</p>
+            )}
           </ChatArea>
           <MesageInput sendMessage={sendMessage} />
         </ChatContainer>
