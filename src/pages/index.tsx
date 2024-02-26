@@ -31,7 +31,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 interface Chat {
   id: string;
-  name: string;
+  messages: string[];
 }
 
 export default function Home() {
@@ -52,10 +52,10 @@ export default function Home() {
     if (userDocSnapshot.exists()) {
       // Document exists, update the chat
       const chatsCollectionRef = collection(db, `users/${user!.uid}/chats`);
-      const priscilaChatDocRef = doc(chatsCollectionRef, "priscila");
+      const ChatDocRef = doc(chatsCollectionRef, "Rob");
 
       await setDoc(
-        priscilaChatDocRef,
+        ChatDocRef,
         {
           messages: arrayUnion(...messages, message),
         },
@@ -64,9 +64,9 @@ export default function Home() {
     } else {
       // Document does not exist, create a new chat
       const chatsCollectionRef = collection(db, `users/${user!.uid}/chats`);
-      const priscilaChatDocRef = doc(chatsCollectionRef, "priscila");
+      const ChatDocRef = doc(chatsCollectionRef, "Rob");
 
-      await setDoc(priscilaChatDocRef, {
+      await setDoc(ChatDocRef, {
         messages: [message],
       });
     }
@@ -88,19 +88,19 @@ export default function Home() {
       if (userDocSnapshot.exists()) {
         const chatsCollection = collection(db, `users/${user!.uid}/chats`);
 
-        const querySnapshot = await getDocs(chatsCollection);
+        const snapshot = await getDocs(chatsCollection);
 
-        const chatsData = querySnapshot.docs.map((doc) => {
-          const chatData = doc.data();
-          return {
-            chatData,
-          };
+        const chatsData: any = [];
+        snapshot.forEach((doc) => {
+          chatsData.push({ id: doc.id, ...doc.data() });
         });
+
+        setChats(chatsData);
         console.log(chatsData);
-        //setChats(chatsData);
       }
     }
-    setMessages([]);
+
+    //setMessages([]);
     fetchChats();
   }, [selectedChat, user]);
 
@@ -119,9 +119,15 @@ export default function Home() {
       <Wrapper className={` ${inter.className}`}>
         <ContactsContainer>
           <SearchContactInput />
-          <ContactItem handleSelectContact={handleSelectContact} />
-          <ContactItem handleSelectContact={handleSelectContact} />
-          <ContactItem handleSelectContact={handleSelectContact} />
+          {chats.map((chat, i) => {
+            return (
+              <ContactItem
+                key={i}
+                chat={chat}
+                handleSelectContact={handleSelectContact}
+              />
+            );
+          })}
         </ContactsContainer>
         <ChatContainer>
           <ChatHeader />
