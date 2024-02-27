@@ -5,12 +5,18 @@ import {
 } from "@/styles/components/searchContactInput";
 import { MoreVertical } from "lucide-react";
 
-export function SearchContactInput() {
+interface SearchContactInputProps {
+  handleShowOptions: () => void;
+}
+export function SearchContactInput({
+  handleShowOptions,
+}: SearchContactInputProps) {
   return (
     <SearchContainer>
       <OptBtn>
-        <MoreVertical width={32} height={32} />
+        <MoreVertical onClick={handleShowOptions} width={32} height={32} />
       </OptBtn>
+
       <Input />
     </SearchContainer>
   );

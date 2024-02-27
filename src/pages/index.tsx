@@ -23,6 +23,7 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
+import { OptionsMenu } from "@/components/optionsMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function Home() {
   const [chats, setChats] = useState<Chat[]>([]);
   const [messages, setMessages] = useState<string[]>([]);
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
+  const [modalState, setModalState] = useState(false);
 
   const { user } = useContext(AuthContext);
 
@@ -85,6 +87,10 @@ export default function Home() {
     }
   }
 
+  function handleShowOptions() {
+    setModalState(!modalState);
+  }
+
   useEffect(() => {
     async function fetchChats() {
       const userDocRef = doc(db, "users", user!.uid);
@@ -121,7 +127,8 @@ export default function Home() {
 
       <Wrapper className={` ${inter.className}`}>
         <ContactsContainer>
-          <SearchContactInput />
+          <SearchContactInput handleShowOptions={handleShowOptions} />
+          <OptionsMenu state={modalState ? "OPEN" : "CLOSED"} />
           {chats.map((chat, i) => {
             return (
               <ContactItem
