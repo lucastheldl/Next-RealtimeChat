@@ -18,11 +18,8 @@ import { db } from "@/firebase/config";
 import {
   doc,
   getDoc,
-  updateDoc,
   arrayUnion,
   setDoc,
-  where,
-  query,
   collection,
   getDocs,
 } from "firebase/firestore";
@@ -79,7 +76,14 @@ export default function Home() {
     setMessages(chat.messages);
   }
 
-  function handleSearchContact(name: string) {}
+  async function handleSearchContact(name: string) {
+    const userDocRef = doc(db, "users", user!.uid);
+    const userDocSnapshot = await getDoc(userDocRef);
+
+    if (userDocSnapshot.exists()) {
+      console.log({ id: userDocSnapshot.id, ...userDocSnapshot.data() });
+    }
+  }
 
   useEffect(() => {
     async function fetchChats() {
@@ -97,12 +101,10 @@ export default function Home() {
         });
 
         setChats(chatsData);
-        console.log(chatsData);
       }
     }
-
-    //setMessages([]);
     fetchChats();
+    handleSearchContact("rob");
   }, [selectedChat, user]);
 
   return (
