@@ -9,7 +9,6 @@ export function OptionsMenu({ state }: OptionsMenuProps) {
   return (
     <OptionsContainer state={state}>
       <Option href={"/settings"}>Configurações</Option>
-      <Option href={"/settings"}>Configurações</Option>
     </OptionsContainer>
   );
 }

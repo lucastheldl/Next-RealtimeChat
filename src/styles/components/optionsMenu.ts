@@ -7,13 +7,11 @@ export const OptionsContainer = styled("div", {
   left: 15,
 
   flexDirection: "column",
-  alignItems: "center",
 
   listStyle: "none",
 
   borderRadius: "6px",
-  padding: "1rem",
-  width: "250px",
+  padding: "1rem 0",
 
   backgroundColor: "$gray800",
 
@@ -30,11 +28,15 @@ export const OptionsContainer = styled("div", {
 });
 
 export const Option = styled(Link, {
+  width: "200px",
+
   color: "White",
   textDecoration: "none",
+  textAlign: "center",
 
-  borderBottom: "1px solid white",
   marginBottom: "1rem",
+
+  padding: "0 1rem",
 
   "&:hover": {
     cursor: "pointer",
