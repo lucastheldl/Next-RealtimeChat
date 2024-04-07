@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import {
   ChatArea,
   ChatContainer,
+  ChatContentWraper,
   ContactsContainer,
   Wrapper,
 } from "@/styles/home";
@@ -143,12 +144,15 @@ export default function Home() {
           <ChatHeader chat={selectedChat} />
           <ChatArea>
             {selectedChat ? (
-              messages &&
-              messages.map((message, i) => {
-                return (
-                  <Message key={i} type={"sended"} messageText={message} />
-                );
-              })
+              messages && (
+                <ChatContentWraper>
+                  {messages.map((message, i) => {
+                    return (
+                      <Message key={i} type={"sended"} messageText={message} />
+                    );
+                  })}
+                </ChatContentWraper>
+              )
             ) : (
               <p>Selecione um chat para conversar...</p>
             )}

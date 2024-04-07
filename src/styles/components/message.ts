@@ -42,8 +42,4 @@ export const MessageConatiner = styled("div", {
   borderRadius: "6px",
 
   color: "white",
-
-  "&:first-child": {
-    marginTop: "auto !important",
-  },
 });

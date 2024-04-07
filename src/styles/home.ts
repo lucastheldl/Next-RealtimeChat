@@ -25,12 +25,28 @@ export const ChatContainer = styled("section", {
 
 export const ChatArea = styled("div", {
   display: "flex",
-  flexDirection: "column",
-  flex: 1,
-  gap: "0.5rem",
+  //flexDirection: "column",
+  flexDirection: "column-reverse",
+
+  //flex: 1,
+  //gap: "0.5rem",
 
   overflow: "auto",
   overflowY: "auto",
 
+  //padding: "0 1rem 1rem 0",
+
+  p: {
+    textAlign: "center",
+    margin: "auto 0",
+  },
+});
+
+export const ChatContentWraper = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+
+  flex: 1,
+  gap: "0.5rem",
   padding: "0 1rem 1rem 0",
 });
